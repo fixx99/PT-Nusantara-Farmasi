@@ -104,7 +104,7 @@ a:hover {
     width: 100%;
     top: 0;
     z-index: 1000;
-    padding: 15px 0;
+    padding: 10px 0;
 }
 
 .main-header .container {
@@ -165,7 +165,7 @@ a:hover {
 
 /* Hero Slider */
 .hero-slider {
-    margin-top: 80px;
+    margin-top: 70px;
     position: relative;
     height: 600px;
     overflow: hidden;
@@ -188,11 +188,11 @@ a:hover {
 }
 
 .slide:nth-child(1) {
-    background-image: linear-gradient(#478eea, #4ddc8b), url('../images/hero1.jpg');
+    background-image: linear-gradient(#478eea, #4ddc8b), url('images/Hero 1.jpg');
 }
 
 .slide:nth-child(2) {
-    background-image: linear-gradient(#478eea, #4ddc8b), url('../images/hero2.jpg');
+    background-image: linear-gradient(#478eea, #4ddc8b), url('images/hero2.jpg');
 }
 
 .slide-content {
@@ -282,7 +282,7 @@ a:hover {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3 ease;
+    transition: transform 0.3s, box-shadow 0.3s ease;
 }
 
 .product-card:hover{
@@ -323,7 +323,7 @@ a:hover {
 
 .section-cta {
     margin-top: 30px;
-    text-align: center;  
+    text-align: center; 
 }
 
 /*about section*/
@@ -395,7 +395,7 @@ a:hover {
     border-radius: 10px;
     overflow:hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3 ease;
+    transition: transform 0.3s ease;
 }
 
 .news-card:hover{
@@ -505,7 +505,7 @@ a:hover {
     border-radius: 50px;
     background-color: rgb(223, 223, 223,0.1);
     color: var(--light-color);
-    transition:all 0.3 ease;
+    transition:all 0.3s ease;
 }
 
 .social-links a:hover{
@@ -523,7 +523,7 @@ a:hover {
 .footer-column ul li a {
     color: rgb(223, 223, 223);
     font-size: 14px;
-    transition: all 0,3 ease;
+    transition: all 0.3s ease;
 }
 
 .footer-column ul li a:hover {
@@ -580,6 +580,7 @@ a:hover {
 }
 
 /* Responsive Styles */
+/*tampilan desktop*/
 @media (max-width: 992px) {
     .about-section .container {
         flex-direction: column;
@@ -595,19 +596,23 @@ a:hover {
     }
 }
 
+/*tablet&hp*/
 @media (max-width: 768px) {
+    .main-header{padding: 8px 0;}
+    .logo img{height: 40px;}
     .main-nav {
         position: fixed;
-        top: 80px;
+        top: 60px;
         left: -100%;
         width: 80%;
-        height: calc(100vh - 80px);
+        height: calc(100vh - 60px);
         background-color: var(--light-color);
         box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
         transition: left 0.3s ease;
         z-index: 999;
+        padding-top: 20px;
     }
-    
+
     .main-nav.active {left: 0;}
     
     .main-nav ul {
@@ -617,19 +622,52 @@ a:hover {
     
     .main-nav ul li {margin: 15px 0;}
     
-    .mobile-menu-toggle {display: block;}
-    
-    .hero-slider { height: 500px; }
+    .mobile-menu-toggle {
+        display: block;
+        background:none;
+        border: none;
+        color: var(--dark-color);
+        font-size: 24px;
+        cursor:pointer;
+        z-index: 1001;
+    }
+
+    .mobile-menu-toggle.active i.fa-bars{display: none;}
+
+    .mobile-menu-toggle.active i.fa-times{display: inline-block;}
+
+    .language-switcher{
+        margin-left: auto;
+        margin-right: 15px;
+    }
+    .hero-slider { 
+        margin-top: 60px;
+        height: 400px;
+    }
     .slide-content h1 {font-size: 2.2rem; }
     .section-title { font-size: 1.8rem; }
 }
 
+/*hp kecil*/
 @media (max-width: 576px) {
-    .hero-slider {height: 400px}
+    .hero-slider {
+        height: 350px;
+        margin-top: 56px;
+    }
     
-    .slide-content h1 {font-size: 1.8rem;}
+    .slide-content h1 {
+        font-size:28px;
+        margin-bottom: 15px;
+    }
     
-    .slide-content p {font-size: 1rem;}
+    .slide-content p {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .btn{
+        padding: 10px 20px;
+    }
     
     .products-grid, .news-grid {grid-template-columns: 1fr;}
     
