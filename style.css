@@ -603,17 +603,17 @@ a:hover {
     .main-nav {
         position: fixed;
         top: 60px;
-        left: -100%;
-        width: 80%;
+        rightt: -100%;
+        width: 25%;
         height: calc(100vh - 60px);
         background-color: var(--light-color);
-        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-        transition: left 0.3s ease;
+        box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+        transition: right 0.3s ease;
         z-index: 999;
         padding-top: 20px;
     }
 
-    .main-nav.active {left: 0;}
+    .main-nav.active {right: 0;}
     
     .main-nav ul {
         flex-direction: column;
@@ -682,3 +682,4 @@ a:hover {
         gap: 10px;
     }
 }
+
