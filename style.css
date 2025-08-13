@@ -597,13 +597,13 @@ a:hover {
 }
 
 /*tablet&hp*/
-@media (max-width: 768px) {
+@media (max-width: 769px) {
     .main-header{padding: 8px 0;}
-    .logo img{height: 40px;}
+    .logo img{height: 50px;}
     .main-nav {
         position: fixed;
         top: 60px;
-        rightt: -100%;
+        right: -100%;
         width: 25%;
         height: calc(100vh - 60px);
         background-color: var(--light-color);
@@ -682,4 +682,3 @@ a:hover {
         gap: 10px;
     }
 }
-
