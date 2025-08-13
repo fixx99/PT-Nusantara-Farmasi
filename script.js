@@ -1,12 +1,32 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Mobile Menu Toggle
-    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const mobileToggle = document.querySelector('.mobile-menu-toggle');
     const mainNav = document.querySelector('.main-nav');
     
-    mobileMenuToggle.addEventListener('click', function() {
+    mobileToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
         mainNav.classList.toggle('active');
-        this.querySelector('i').classList.toggle('fa-times');
-        this.querySelector('i').classList.toggle('fa-bars');
+        this.classList.toggle('active');
+        
+        // Ganti icon
+        const icon = this.querySelector('i');
+        if (this.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times');
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars');
+        }
+    });
+    
+    // Tutup menu ketika mengklik di luar
+    document.addEventListener('click', function(e) {
+        if (!mainNav.contains(e.target) && e.target !== mobileToggle) {
+            mainNav.classList.remove('active');
+            mobileToggle.classList.remove('active');
+            mobileToggle.querySelector('i').classList.remove('fa-times');
+            mobileToggle.querySelector('i').classList.add('fa-bars');
+        }
     });
     
     // Hero Slider
@@ -15,24 +35,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevBtn = document.querySelector('.prev-slide');
     const nextBtn = document.querySelector('.next-slide');
     let currentSlide = 0;
-    
+
     // Create dots
-    slides.forEach((slide, index) => {
-        const dot = document.createElement('span');
-        dot.classList.add('dot');
-        if (index === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => goToSlide(index));
-        sliderDots.appendChild(dot);
-    });
+    if (slides.length > 0 && sliderDots) {
+        slides.forEach((slide, index) => {
+            const dot = document.createElement('span');
+            dot.classList.add('dot');
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(index));
+            sliderDots.appendChild(dot);
+        });
+    }
     
-    const dots = document.querySelectorAll('.dot');
-    
+    //fungsi slider
     function goToSlide(n) {
         slides[currentSlide].classList.remove('active');
-        dots[currentSlide].classList.remove('active');
+        const dots = document.querySelectorAll('.dot');
+        if (dots.length > 0) dots[currentSlide].classList.remove('active');
         currentSlide = (n + slides.length) % slides.length;
         slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.add('active');
+        if (dots.length > 0) dots[currentSlide].classList.add('active');
     }
     
     function nextSlide() {
@@ -108,34 +130,47 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Animation on scroll
     function animateOnScroll() {
-        const elements = document.querySelectorAll('.product-card, .news-card, .about-content, .about-image');
-        
-        elements.forEach(element => {
-            const elementPosition = element.getBoundingClientRect().top;
-            const screenPosition = window.innerHeight / 1.2;
+        // Hanya jalankan di desktop
+        if (window.innerWidth > 768) {
+            const elements = document.querySelectorAll('.product-card, .news-card, .about-content, .about-image');
             
-            if (elementPosition < screenPosition) {
-                element.style.opacity = '1';
-                element.style.transform = 'translateY(0)';
-            }
-        });
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
     }
     
     // Set initial state for animation
-    document.querySelectorAll('.product-card, .news-card').forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    });
-    
-    document.querySelector('.about-content').style.opacity = '0';
-    document.querySelector('.about-content').style.transform = 'translateX(-20px)';
-    document.querySelector('.about-content').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    
-    document.querySelector('.about-image').style.opacity = '0';
-    document.querySelector('.about-image').style.transform = 'translateX(20px)';
-    document.querySelector('.about-image').style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    if (window.innerWidth > 768) {
+        document.querySelectorAll('.product-card, .news-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+        
+        const aboutContent = document.querySelector('.about-content');
+        const aboutImage = document.querySelector('.about-image');
+        
+        if (aboutContent) {
+            aboutContent.style.opacity = '0';
+            aboutContent.style.transform = 'translateX(-20px)';
+            aboutContent.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        }
+        
+        if (aboutImage) {
+            aboutImage.style.opacity = '0';
+            aboutImage.style.transform = 'translateX(20px)';
+            aboutImage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        }
+    }
     
     window.addEventListener('scroll', animateOnScroll);
     window.addEventListener('load', animateOnScroll);
+    window.addEventListener('resize', animateOnScroll);
 });
